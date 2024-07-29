@@ -1,0 +1,53 @@
+html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Social Network Platform</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body ng-app="socialNetworkApp">
+    <div ng-controller="MainController">
+      <h1>Welcome to the Social Network</h1>
+      <div ng-if="!isAuthenticated">
+        <h2>Login</h2>
+        <form ng-submit="login()">
+          <input
+            type="text"
+            ng-model="user.username"
+            placeholder="Username"
+            required
+          />
+          <input
+            type="password"
+            ng-model="user.password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+      <div ng-if="isAuthenticated">
+        <h2>Hello, {{currentUser.username}}</h2>
+        <button ng-click="logout()">Logout</button>
+
+        <h3>Create a Post</h3>
+        <form ng-submit="createPost()">
+          <textarea
+            ng-model="newPost.content"
+            placeholder="What's on your mind?"
+            required
+          ></textarea>
+          <button type="submit">Post</button>
+        </form>
+
+        <h3>Posts</h3>
+        <div ng-repeat="post in posts">
+          <p>{{post.content}}</p>
+          <small>by {{post.username}}</small>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
